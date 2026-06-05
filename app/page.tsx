@@ -27,12 +27,12 @@ export default function Home() {
   return (
     <main className="pagina">
       <section className="tarjeta">
-        <h1 className="titulo">Gestor de tareas</h1>
+        <h1 className="titulo">Gestor de tareas - AlvaroCasas React</h1>
 
         <input
           className="input"
           type="text"
-          placeholder="Título de la tarea"
+          placeholder="Titulo"
           value={titulo}
           onChange={(e) => setTitulo(e.target.value)}
         />
@@ -49,7 +49,7 @@ export default function Home() {
         </button>
         <div className="lista">
         {tareas.length === 0 ? (
-            <p className="sin-tareas">No hay tareas todavía</p>
+            <p className="sin-tareas"></p>
           ) : (
             tareas.map((tarea) => (
            <div key={tarea.id} className="tarea">

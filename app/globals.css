@@ -4,23 +4,22 @@
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: Arial;
   background: #f3f4f6;
   color: #111;
 }
 
 .pagina {
-  min-height: 100vh;
   padding: 30px;
 }
 
 .tarjeta {
   max-width: 700px;
   margin: 0 auto;
-  background: white;
+  background: rgb(197, 232, 255);
   padding: 24px;
   border-radius: 12px;
-  border: 1px solid #ddd;
+
 }
 
 .titulo {
@@ -45,7 +44,7 @@ body {
 }
 
 .boton {
-  background: #f10fb9;
+  background: #6fbcfa;
   color: white;
   border: none;
   padding: 10px 16px;
