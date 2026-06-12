@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useTransition } from "react"
-import { crearTarea, borrarTarea } from "./actions"
+import { crearTarea } from "./actions"
 
 type Tarea = {
   id: number
@@ -9,14 +9,14 @@ type Tarea = {
   descripcion: string
 }
 
-export function TareaForm({
-  tareasIniciales = [],
+export function GestorTareasCliente({
+  tareasIniciales,
 }: {
-  tareasIniciales?: Tarea[]
+  tareasIniciales: Tarea[]
 }) {
   const [titulo, setTitulo] = useState("")
   const [descripcion, setDescripcion] = useState("")
-  const [tareas, setTareas] = useState<Tarea[]>(tareasIniciales ?? [])
+  const [tareas, setTareas] = useState<Tarea[]>(tareasIniciales)
   const [isPending, startTransition] = useTransition()
 
   const agregarTarea = () => {
@@ -24,19 +24,12 @@ export function TareaForm({
 
     startTransition(async () => {
       await crearTarea(titulo.trim(), descripcion.trim())
-
-      setTitulo("")
-      setDescripcion("")
       window.location.reload()
     })
   }
 
   const eliminarTarea = (id: number) => {
-    startTransition(async () => {
-      await borrarTarea(id)
-      setTareas((prev) => prev.filter((tarea) => tarea.id !== id))
-      window.location.reload()
-    })
+    setTareas(tareas.filter((tarea) => tarea.id !== id))
   }
 
   return (
@@ -65,7 +58,7 @@ export function TareaForm({
 
         <div className="lista">
           {tareas.length === 0 ? (
-            <p className="sin-tareas">No hay tareas.</p>
+            <p className="sin-tareas"></p>
           ) : (
             tareas.map((tarea) => (
               <div key={tarea.id} className="tarea">
@@ -77,9 +70,8 @@ export function TareaForm({
                 <button
                   className="boton-borrar"
                   onClick={() => eliminarTarea(tarea.id)}
-                  disabled={isPending}
                 >
-                  {isPending ? "Procesando..." : "Eliminar"}
+                  Eliminar
                 </button>
               </div>
             ))
